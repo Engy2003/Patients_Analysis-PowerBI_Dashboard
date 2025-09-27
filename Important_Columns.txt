@@ -1,0 +1,39 @@
+Age Buckets = SWITCH(
+                TRUE(),
+                'Patients Dataset'[patient_age]<=10, "0-10",
+                'Patients Dataset'[patient_age]<=20, "11-20",
+                'Patients Dataset'[patient_age]<=30, "21-30",
+                'Patients Dataset'[patient_age]<=40, "31-40",
+                'Patients Dataset'[patient_age]<=50, "41-50",
+                'Patients Dataset'[patient_age]<=60, "51-60",
+                'Patients Dataset'[patient_age]<=70, "61-70",
+                "70+"
+            )
+
+__________________________________________________________________________________________________
+
+Age Group = 
+    VAR _PatientAge = 'Patients Dataset'[patient_age]
+    RETURN
+    IF(_PatientAge<=2, "Infancy",
+        IF(_PatientAge<=6, "Early Childhood",
+            IF(_PatientAge<=12, "Middle Childhood",
+                IF(_PatientAge<=18, "teenager",
+                "Adult"
+                )
+            )
+        )
+    )
+
+__________________________________________________________________________________________________
+
+Wait Time Buckets = SWITCH(
+                TRUE(),
+                'Patients Dataset'[patient_waittime]<=10, "0-10",
+                'Patients Dataset'[patient_waittime]<=20, "11-20",
+                'Patients Dataset'[patient_waittime]<=30, "21-30",
+                'Patients Dataset'[patient_waittime]<=40, "31-40",
+                'Patients Dataset'[patient_waittime]<=50, "41-50",
+                'Patients Dataset'[patient_waittime]<=60, "51-60",
+                "60+"
+            )
