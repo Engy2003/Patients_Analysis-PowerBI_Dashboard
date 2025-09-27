@@ -1,0 +1,25 @@
+Date = 
+ADDCOLUMNS(
+    CALENDARAUTO(),
+    "Year", YEAR([Date]),
+    "Month", FORMAT([Date],"mmm"),
+    "WeekDayType", IF(WEEKDAY([Date])=1, "Weekend",IF(WEEKDAY([Date])=7, "Weekend","Weekday")),
+    "WeekDay", FORMAT([Date],"ddd"),
+    "MonthNum", MONTH([Date]),
+    "WeekDayNum", WEEKDAY([Date])
+)
+
+__________________________________________________________________________________________________
+
+Table = 
+    VAR _PatientTable =
+    CALCULATETABLE(
+        ADDCOLUMNS(
+            SUMMARIZE('Date','Date'[Month]),
+            "@Total_Patients" , [Total Patients]
+        ),
+        ALLSELECTED()
+    )
+    RETURN _PatientTable
+
+__________________________________________________________________________________________________
